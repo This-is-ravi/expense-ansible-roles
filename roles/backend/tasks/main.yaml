@@ -17,12 +17,16 @@
       name: expense
 
   - name: run app pre-requisites
+    tags:
+    - deployment
     ansible.builtin.import_role:  # this cmd wil import code from common folder
       name: common
       tasks_from: app-pre-req  #here we r loading tasks from common , vars also automaticaly wil run
 
 
   - name: install npm dependencies
+    tags:
+    - deployment
     ansible.builtin.command: npm install
     args:
       chdir: /app
@@ -48,12 +52,14 @@
       state: import
       name: all
 
-  - name: daemon reload
+  - name: daemon reload  # if any changes in services we can reload
     ansible.builtin.systemd_service:
       daemon_reload: true
 
   - name: start and enable backend service
+    tags:
+    - deployment
     ansible.builtin.service:
       name: backend
-      state: started
+      state: restarted
       enabled: yes
