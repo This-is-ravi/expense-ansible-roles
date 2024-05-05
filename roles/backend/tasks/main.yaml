@@ -17,7 +17,7 @@
       name: expense
 
   - name: run app pre-requisites
-    tags:
+    tags:  # this tags r used to run specific tasks
     - deployment
     ansible.builtin.import_role:  # this cmd wil import code from common folder
       name: common
@@ -34,7 +34,7 @@
   - name: copy backend service
     ansible.builtin.template:
       src: backend.service.j2
-      dest: /etc/systemd/system/backend.service
+      dest: /etc/systemd/system/backend.service  #notify: - daemon reload 
 
   - name: install python mysql dependencies
     ansible.builtin.pip: 
@@ -52,7 +52,7 @@
       state: import
       name: all
 
-  - name: daemon reload  # if any changes in services we can reload
+  - name: daemon reload  # if any changes in services we can reload, keep this in handlers folder
     ansible.builtin.systemd_service:
       daemon_reload: true
 
