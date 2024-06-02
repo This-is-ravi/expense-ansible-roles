@@ -2,7 +2,7 @@
   hosts: all #localhost
   connection: local
   vars_files:
-  - "variable-{{ env }}.yaml" #we r passing env, variables-dev.yaml , prod ..
+  - "variabls-{{ env }}.yaml" #we r passing env, variables-dev.yaml , prod ..
   become: yes
   roles:
   - "{{ component }}"
