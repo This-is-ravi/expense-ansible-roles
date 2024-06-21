@@ -24,12 +24,13 @@
       tasks_from: app-pre-req  #here we r loading tasks from common , vars also automaticaly wil run
 
 
-  - name: install npm dependencies
-    tags:
-    - deployment
-    ansible.builtin.command: npm install
-    args:
-      chdir: /app
+  # no need this bcz in dependencies are already installed in artifact 
+  # - name: install npm dependencies
+  #   tags:
+  #   - deployment
+  #   ansible.builtin.command: npm install
+  #   args:
+  #     chdir: /app
 
   - name: copy backend service
     ansible.builtin.template:
